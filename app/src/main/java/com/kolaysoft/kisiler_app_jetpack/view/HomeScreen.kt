@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.kolaysoft.kisiler_app_jetpack.R
 import com.kolaysoft.kisiler_app_jetpack.view.widget.CustomTopAppBar
+import com.kolaysoft.kisiler_app_jetpack.view.widget.CustomizedCard
 import com.kolaysoft.kisiler_app_jetpack.viewmodel.PersonRegisterViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -49,7 +50,7 @@ fun HomeScreen(navController: NavController) {
                     count = viewModel.personList.count(),
                     itemContent = {
                         val person = viewModel.personList[it];
-                        CardDesign(person.name, person.phoneNumber)
+                        CustomizedCard(person.name, person.phoneNumber)
                     }
                 )
             }
@@ -71,35 +72,4 @@ fun HomeScreen(navController: NavController) {
 fun HomeScreenPreview() {
     val navController = rememberNavController()
     HomeScreen(navController = navController)
-}
-
-@Composable
-fun CardDesign(name: String, phoneNumber: String) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(70.dp)
-            .padding(4.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Text(text = name)
-                Text(text = phoneNumber)
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                painter = painterResource(id = R.drawable.delete),
-                contentDescription = "",
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .height(30.dp)
-            )
-        }
-    }
 }
